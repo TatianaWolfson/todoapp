@@ -1,0 +1,46 @@
+@import url('https://fonts.googleapis.com/css?family=Indie+Flower');
+@import '../../variables';
+
+.content-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: 100%;
+  width: 100%;
+}
+.input-section {
+  padding: 30px;
+  width: 100%;
+  position: relative;
+  .form-control:focus {
+      outline: none;
+      boreder-color: $primary-color;
+  }
+}
+.form-control {
+  width: 100%;
+  line-height: 2;
+}
+.btn {
+  position: absolute;
+  right: 40px;
+  width: 36px;
+  height: 36px;
+  background: url("../../assets/add.png") 0 0 no-repeat;
+  border-color: transparent;
+  &:hover {
+    cursor: pointer;
+    &:disabled {
+      cursor: no-drop;
+    }
+  }
+}
+.list-section {
+  flex-basis: 50%;
+  padding: 30px;
+  width: 100%;
+}
+hr {
+  width: 100%;
+  margin: 0;
+}

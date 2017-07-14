@@ -1,8 +1,30 @@
-.header {
-  padding: 20px;
-  h1 {
-    color: #369;
-    font-family: Arial, Helvetica, sans-serif;
-    font-size: 250%;
+@import '../variables';
+
+body {
+  background: $body-bg;
+}
+.body-wrapper {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  font-family: 'Indie Flower', cursive;
+  app-header {
+    flex-basis: 100px;
   }
+  app-footer {
+    flex-basis: 60px;
+  }
+  app-content {
+    flex: 1;
+  }
+}
+.book {
+  height: calc(100% - 100px);
+  display: flex;
+  flex-direction: column;
+  width: $content-width;
+  margin: 80px auto 40px;
+  border-radius: 3px;
+  box-shadow: 0 2px 4px 0 rgba(0,0,0,0.5);
+  background: white url("../assets/group.png") 50% 80% no-repeat;
 }
