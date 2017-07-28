@@ -4,5 +4,5 @@ import { api } from './api';
 import { Items } from '../mongooseModels/items.mongoose.model';
 
 export function itemsAPI(app:express.Application) {
-  api(app, Items, '/api/items/');
+  api(app, Items, '/api/items');
 }

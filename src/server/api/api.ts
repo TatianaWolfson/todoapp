@@ -1,15 +1,17 @@
-import express from 'express';
-import mongoose from 'mongoose';
+import * as express from 'express';
+import * as mongoose from 'mongoose';
 
-export function api(app:express.Application, Model:any, url:string) {
+export function api(app: express.Application, Model: any, url: string) {
 
   app.get(url, (req, res) => {
     var filter = Model.filter || {};
     Model.find(filter, (err, items) => {
       if (err) {
+        console.log('api1');
         res.send(err);
       } else
-        res.json(items);
+        console.log('api2');
+      res.json(items);
     });
   });
 
@@ -29,6 +31,24 @@ export function api(app:express.Application, Model:any, url:string) {
         }
         console.log('Internal error(%d): %s', res.statusCode, err.message);
       }
+    });
+  });
+
+  app.delete(url + ':id', (req, res) => {
+    Model.remove({
+      _id: req.params.id
+    }, (err) => {
+      if (err) {
+        res.send(err);
+      }
+      res.send({status: 'OK'});
+    });
+  });
+
+  app.put(url, (req, res)=> {
+    Model.findOneAndUpdate({_id: req.body._id}, req.body, {new: true}, (err, result) => {
+      if (err) return console.error(err);
+      res.send(result);
     });
   });
 }

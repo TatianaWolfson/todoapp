@@ -1,18 +1,30 @@
 <div class="content-wrapper">
   <div class="input-section form-inline">
 
-    <input type="text" autofocus placeholder="Add new ToDo item"
-    class="form-control new-item" [(ngModel)]="newItem.title"
-    (keyup.enter)="addItem()">
+    <input type="text" autofocus
+           placeholder="Add new ToDo item"
+           class="form-control new-item"
+           [(ngModel)]="newItem.title"
+           (keyup.enter)="addItem()">
 
-    <button type="button" class="btn btn-outline-primary" [disabled]="!newItem.title"
-    (click)="addItem()"></button>
+    <button type="button"
+            class="btn btn-outline-primary"
+            [disabled]="!newItem.title"
+            (click)="addItem()">
+    </button>
 
   </div>
   <hr>
+
   <div class="list-section">
     <ul class="list-group">
-      <li class="list-group-item" *ngFor="let item of items">{{item.title}}</li>
+      <li class="list-group-item" *ngFor="let item of items">
+        <span [class.is-completed]="item.isComplete">{{item.title}}</span>
+        <div class="control-buttons">
+          <button type="button" class="btn btn-outline-primary btn-edit" (click)="editItem(item)"></button>
+          <button type="button" class="btn btn-outline-primary btn-delete" (click)="deleteItem(item._id)"></button>
+        </div>
+      </li>
     </ul>
   </div>
 

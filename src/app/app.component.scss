@@ -1,8 +1,9 @@
-@import '../variables';
+@import '../styles/_variables';
 
 body {
   background: $body-bg;
 }
+
 .body-wrapper {
   display: flex;
   flex-direction: column;
@@ -18,13 +19,14 @@ body {
     flex: 1;
   }
 }
+
 .book {
   height: calc(100% - 100px);
   display: flex;
   flex-direction: column;
   width: $content-width;
-  margin: 80px auto 40px;
+  margin: 80px auto 20px;
   border-radius: 3px;
-  box-shadow: 0 2px 4px 0 rgba(0,0,0,0.5);
+  box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.5);
   background: white url("../assets/group.png") 50% 80% no-repeat;
 }

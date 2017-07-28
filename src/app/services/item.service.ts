@@ -1,26 +1,27 @@
-import { Injectable } from '@angular/core';
-import { Http, Headers, Response } from '@angular/http';
-import { Observable } from 'rxjs/Observable';
+import {Injectable} from '@angular/core';
+import {Http, Headers, Response} from '@angular/http';
+import {Observable} from 'rxjs/Observable';
 import 'rxjs/Rx';
-//noinspection TypeScriptCheckImport
-import { Item } from '../item';
+// noinspection TypeScriptCheckImport
+import {Item} from '../item';
 
 @Injectable()
 export class ItemService {
 
-  list:Item[] = [];
-  protected _url: string = '/api/items/';
+  list: Item[] = [];
+  protected _url: string = 'http://127.0.0.1:8080/list';
 
-  private request:Observable<Item[]>;
+  private request: Observable<Item[]>;
 
-  constructor(private http: Http) { }
+  constructor(private http: Http) {
+  }
 
-  addItem(body: Item) {
+  addItem(body: Item): Observable<Item[]> {
     let that = this;
     var headers = new Headers();
     headers.append('Content-Type', 'application/json');
     return this.http.post(this._url, JSON.stringify(body), {headers: headers})
-      .map(res => {
+      .map((res: Response) => {
         let item = res.json();
         that.request = null;
         return item;
@@ -33,13 +34,35 @@ export class ItemService {
     }
     if (!this.request) {
       this.request = this.http.get(this._url)
-        .map((res:Response) => res.json())
-        .map((data:Item[]) => {
+        .map((res: Response) => res.json())
+        .map((data: Item[]) => {
           this.request = null;
           return this.list = data;
         });
     }
     return this.request;
+  }
+
+  deleteItem(id: string): Observable<Response> {
+    let that = this;
+    var headers = new Headers();
+    headers.append('Content-Type', 'application/json');
+    return this.http.delete(this._url + id, {headers: headers})
+      .map((res: Response) => {
+        that.request = null;
+        return res;
+      });
+  }
+
+  updateItem(body: Item): Observable<Item[]> {
+    let that = this;
+    var headers = new Headers();
+    headers.append('Content-Type', 'application/json');
+    return this.http.put(this._url, JSON.stringify(body), {headers: headers})
+      .map((res: Response) => {
+        that.request = null;
+        return res.json();
+      });
   }
 
 }
